@@ -11,8 +11,14 @@ venv313/
 # Database / local files
 *.sql
 *.db
+*.sqlite
+*.sqlite3
+ca.pem
 
 # OS
 Thumbs.db
 .DS_Store
+
+# Backup
 app_before_login.py
+import_to_tidb.py
