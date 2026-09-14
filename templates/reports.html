@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital Reports - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>Hospital Reports</h1>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Patient Statistics</h3>
+            <p>Total Patients: {{ total_patients }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Doctor Statistics</h3>
+            <p>Total Doctors: {{ total_doctors }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Appointment Statistics</h3>
+            <p>Total Appointments: {{ total_appointments }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Medicine Statistics</h3>
+            <p>Total Medicines: {{ total_medicines }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Billing Statistics</h3>
+            <p>Total Bills: {{ total_bills }}</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

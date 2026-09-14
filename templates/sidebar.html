@@ -1,0 +1,52 @@
+<div class="sidebar">
+
+    <h2>MediCare</h2>
+
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+        Dashboard
+    </a>
+
+    <a href="/patients" class="{% if request.path == '/patients' %}active{% endif %}">
+        Patients
+    </a>
+
+    {% if session.get('role') in ['admin', 'doctor'] %}
+    <a href="/doctors" class="{% if request.path == '/doctors' %}active{% endif %}">
+        Doctors
+    </a>
+    {% endif %}
+
+    <a href="/appointments" class="{% if request.path == '/appointments' %}active{% endif %}">
+        Appointments
+    </a>
+
+    <a href="/departments" class="{% if request.path == '/departments' %}active{% endif %}">
+        Departments
+    </a>
+
+    {% if session.get('role') == 'admin' %}
+    <a href="{{ url_for('admin_registrations') }}"
+       class="{% if request.path == '/admin/registrations' %}active{% endif %}">
+        Pending Registrations
+    </a>
+    {% endif %}
+
+    <a href="/pharmacy" class="{% if request.path == '/pharmacy' %}active{% endif %}">
+        Pharmacy
+    </a>
+
+    {% if session.get('role') in ['admin', 'patient'] %}
+    <a href="/billing" class="{% if request.path == '/billing' %}active{% endif %}">
+        Billing
+    </a>
+    {% endif %}
+
+    <a href="/reports" class="{% if request.path == '/reports' %}active{% endif %}">
+        Hospital Reports
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        Logout
+    </a>
+
+</div>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>Doctors</h1>
+    </div>
+
+    <div class="table-box">
+
+        {% if session.get("role") == "admin" %}
+
+            <!-- ========================= -->
+            <!-- ADMIN VIEW -->
+            <!-- ========================= -->
+
+            <h2>Doctor Information</h2>
+
+            {% if doctors %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for doctor in doctors %}
+
+                    <tr>
+
+                        <td>{{ doctor[0] }}</td>
+
+                        <td>
+                            <strong>{{ doctor[1] }}</strong>
+                        </td>
+
+                        <td>
+                            {{ doctor[2] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[3] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[4] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[6] or "Not Assigned" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <p>No doctors have been added yet.</p>
+
+            {% endif %}
+
+
+        {% elif session.get("role") == "doctor" %}
+
+            <!-- ========================= -->
+            <!-- DOCTOR VIEW -->
+            <!-- ========================= -->
+
+            <h2>Doctors</h2>
+
+            {% if doctors %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for doctor in doctors %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ doctor[1] }}</strong>
+                        </td>
+
+                        <td>
+                            {{ doctor[2] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[3] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[4] }}
+                        </td>
+
+                        <td>
+                            {{ doctor[6] or "Not Assigned" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <p>No doctors have been added yet.</p>
+
+            {% endif %}
+
+
+        {% elif session.get("role") == "patient" %}
+
+            <!-- ========================= -->
+            <!-- PATIENT VIEW -->
+            <!-- ========================= -->
+
+            <h2>Available Doctors</h2>
+
+            {% if doctors %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for doctor in doctors %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ doctor[1] }}</strong>
+                        </td>
+
+                        <td>
+                            {{ doctor[2] }}
+                        </td>
+
+                        <td>
+
+                            <a href="{{ url_for(
+                                'book_appointment',
+                                doctor_id=doctor[0]
+                            ) }}"
+                               class="book-button">
+
+                                Select Doctor
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <p>No doctors are currently available.</p>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Available Doctors - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>{{ department[1] }}</h1>
+    </div>
+
+    <div class="table-box">
+
+        <h2>Available Doctors</h2>
+
+        {% if doctors %}
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Doctor Name</th>
+                    <th>Specialization</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for doctor in doctors %}
+
+                <tr>
+
+                    <td>
+                        <strong>{{ doctor[1] }}</strong>
+                    </td>
+
+                    <td>
+                        {{ doctor[2] }}
+                    </td>
+
+                    <td>
+
+                        <a href="{{ url_for('book_appointment', doctor_id=doctor[0]) }}"
+                           class="book-button">
+
+                            Select Doctor
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>
+            No doctors are currently available in this department.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

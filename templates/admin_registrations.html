@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pending Registrations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Pending Registrations</h1>
+
+    <p>
+        <a href="{{ url_for('home') }}">← Back to Dashboard</a>
+    </p>
+
+    {% if registrations %}
+
+    <table border="1" cellpadding="10" cellspacing="0">
+
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Registered At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for registration in registrations %}
+
+            <tr>
+
+                <td>{{ registration.account_id }}</td>
+
+                <td>{{ registration.username }}</td>
+
+                <td>{{ registration.role }}</td>
+
+                <td>
+                    {% if registration.role == "patient" %}
+                        {{ registration.patient_name }}
+                    {% else %}
+                        {{ registration.doctor_name }}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if registration.role == "doctor" %}
+                        {{ registration.specialization }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+
+                <td>{{ registration.created_at }}</td>
+
+                <td>
+
+                    <form method="POST"
+                          action="{{ url_for('approve_registration',
+                          account_id=registration.account_id) }}"
+                          style="display:inline;">
+
+                        <button type="submit">
+                            Approve
+                        </button>
+
+                    </form>
+
+                    <form method="POST"
+                          action="{{ url_for('reject_registration',
+                          account_id=registration.account_id) }}"
+                          style="display:inline;">
+
+                        <button type="submit">
+                            Reject
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+        <p>No pending registrations.</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="welcome-title">
+        <h1>Welcome to Hospital Management System</h1>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Patients</h3>
+            <p>{{ total_patients }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Doctors</h3>
+            <p>{{ total_doctors }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Appointments</h3>
+            <p>{{ total_appointments }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Available Beds</h3>
+            <p>{{ available_beds }}</p>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

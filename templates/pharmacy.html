@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pharmacy - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>Pharmacy</h1>
+    </div>
+
+    <div class="form-box">
+
+        <h2>Add Medicine</h2>
+
+        <form method="POST" action="/add_medicine">
+
+            <input type="text"
+                   name="name"
+                   placeholder="Medicine Name"
+                   required>
+
+            <input type="text"
+                   name="category"
+                   placeholder="Category">
+
+            <input type="number"
+                   name="quantity"
+                   placeholder="Quantity"
+                   required>
+
+            <input type="number"
+                   step="0.01"
+                   name="price"
+                   placeholder="Price"
+                   required>
+
+            <input type="date"
+                   name="expiry_date"
+                   required>
+
+            <button type="submit">Add Medicine</button>
+
+        </form>
+
+    </div>
+
+    <div class="table-box">
+
+        <h2>Medicine List</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Medicine Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Expiry Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for medicine in medicines %}
+
+                <tr>
+                    <td>{{ medicine[0] }}</td>
+                    <td>{{ medicine[1] }}</td>
+                    <td>{{ medicine[2] }}</td>
+                    <td>{{ medicine[3] }}</td>
+                    <td>{{ medicine[4] }}</td>
+                    <td>{{ medicine[5] }}</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="6">No medicines added yet.</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

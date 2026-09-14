@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>Patients</h1>
+
+        <button onclick="document.getElementById('patientForm').style.display='block'">
+            + Add Patient
+        </button>
+    </div>
+
+    <div id="patientForm" class="form-box" style="display:none;">
+
+        <h2>Add New Patient</h2>
+
+        <form method="POST" action="/add_patient">
+
+            <input type="text" name="name"
+                   placeholder="Patient Name" required>
+
+            <input type="number" name="age"
+                   placeholder="Age" required>
+
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <input type="text" name="phone"
+                   placeholder="Phone Number" required>
+
+            <input type="text" name="blood_group"
+                   placeholder="Blood Group" required>
+
+            <input type="text" name="address"
+                   placeholder="Address" required>
+
+            <button type="submit">Save Patient</button>
+
+        </form>
+
+    </div>
+
+    <div class="table-box">
+
+        <h2>Patient List</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Blood Group</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for patient in patients %}
+
+                <tr>
+                    <td>{{ patient[0] }}</td>
+                    <td>{{ patient[1] }}</td>
+                    <td>{{ patient[2] }}</td>
+                    <td>{{ patient[3] }}</td>
+                    <td>{{ patient[4] }}</td>
+                    <td>{{ patient[5] }}</td>
+                    <td>{{ patient[6] }}</td>
+                    <td>
+    {% if session.get("role") == "admin" %}
+    <form method="POST"
+          action="{{ url_for('delete_patient', patient_id=patient[0]) }}"
+          onsubmit="return confirm('Are you sure you want to delete this patient?');">
+
+        <button type="submit">Delete</button>
+
+    </form>
+    {% endif %}
+</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="8">No patients added yet.</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

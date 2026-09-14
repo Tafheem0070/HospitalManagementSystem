@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+{% include 'sidebar.html' %}
+
+<div class="main-content">
+
+    <div class="top-bar">
+        <h1>Book Appointment</h1>
+    </div>
+
+    <div class="form-box">
+
+        <h2>Doctor Details</h2>
+
+        <p>
+            <strong>Doctor:</strong>
+            {{ doctor[1] }}
+        </p>
+
+        <p>
+            <strong>Specialization:</strong>
+            {{ doctor[2] }}
+        </p>
+
+        <h2>Select Date and Time</h2>
+
+        <form method="POST">
+
+            <label>Appointment Date</label>
+
+            <input type="date"
+                   name="appointment_date"
+                   required>
+
+            <label>Appointment Time</label>
+
+            <input type="time"
+                   name="appointment_time"
+                   required>
+
+            <button type="submit">
+                Book Appointment
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
