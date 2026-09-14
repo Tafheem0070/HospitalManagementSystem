@@ -15,8 +15,8 @@ def get_db_connection():
         "connection_timeout": 10,
     }
 
-    # TiDB Cloud uses TLS.
-    # Local development uses ca.pem if it exists.
+    # TiDB Cloud requires TLS.
+    # Use the CA certificate locally when available.
     if os.path.exists("ca.pem"):
         config["ssl_ca"] = "ca.pem"
 
